@@ -1,0 +1,8 @@
+[
+  { "name": "diceOne", "image": "./images/diceOne.png" },
+  { "name": "diceTwo", "image": "./images/diceTwo.png" },
+  { "name": "diceThree", "image": "./images/diceThree.png" },
+  { "name": "diceFour", "image": "./images/diceFour.png" },
+  { "name": "diceFive", "image": "./images/diceFive.png" },
+  { "name": "diceSix", "image": "./images/diceSix.png" }
+]
