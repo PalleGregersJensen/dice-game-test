@@ -31,12 +31,13 @@ function showRandomDiceUser() {
   dicesForPlayer.push(randomDiceUser);
   console.log(randomDiceUser);
   console.log(dicesForPlayer);
-  playerPoints = checkArrayForPointsForPlayer();
   console.log(playerPoints);
   showDice(randomDiceUser);
-  if (dicesForPlayer.length >= 2) {
+  if (dicesForPlayer.length == 2) {
+    playerPoints = checkArrayForPointsForPlayer();
     resetDicesForPlayer();
   }
+  document.querySelector("#display-player-points").textContent = playerPoints;
 }
 
 function showDice(dice) {
@@ -52,18 +53,18 @@ function resetDicesForPlayer() {
 
 function checkArrayForPointsForPlayer() {
   console.log("check array for points");
-  if (dicesForPlayer.includes("diceSix", 2)) {
+  if (dicesForPlayer[0].name === "diceSix" && dicesForPlayer[1].name === "diceSix") {
     playerPoints += 4;
     console.log("to seksere");
-  } else if (dicesForPlayer.includes("diceSix")) {
+  } else if (dicesForPlayer[0] === "diceSix" || dicesForPlayer[1] === "diceSix") {
     playerPoints++;
     console.log("en sekser");
   } else if (
-    dicesForPlayer.includes("diceOne", 2) ||
-    dicesForPlayer.includes("diceTwo", 2) ||
-    dicesForPlayer.includes("diceThree", 2) ||
-    dicesForPlayer.includes("diceFour", 2) ||
-    dicesForPlayer.includes("diceFive", 2)
+    dicesForPlayer[0].name === "diceOne" && dicesForPlayer[1].name === "diceOne" ||
+    dicesForPlayer[0].name === "diceTwo" && dicesForPlayer[1].name === "diceTwo" ||
+    dicesForPlayer[0].name === "diceThree" && dicesForPlayer[1].name === "diceThree" ||
+    dicesForPlayer[0].name === "diceFour" && dicesForPlayer[1].name === "diceFour" ||
+    dicesForPlayer[0].name === "diceFive" && dicesForPlayer[1].name === "diceFive" 
   ) {
     playerPoints += 2;
     console.log("to ens");
