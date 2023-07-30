@@ -39,16 +39,21 @@ function showRandomDiceUser() {
   if (dicesForPlayer.length == 2) {
     playerPoints = checkArrayForPointsForPlayer();
     hideRollDice();
+    const myTimeOutResetDiceArray = setTimeout(resetDiceArrayForPlayer, 5000);
+    const myTimeOutRemoveHiddenClass = setTimeout(removeHiddenClass, 5000);
+    myTimeOutResetDiceArray;
+    console.log("timeout reset dice array");
+    myTimeOutRemoveHiddenClass;
+    console.log("remove hidden class");
   }
   document.querySelector("#display-player-points").textContent = playerPoints;
-  // resetDiceArrayForPlayer();
-  // removeHiddenClass();
 }
 // ========== show dice function ==============
 function showDice(dice) {
-  const diceHtml = /*html*/ `<img src="${dice.image}">`;
-  document.querySelector("#dices").insertAdjacentHTML("beforeend", diceHtml);
-}
+    const diceHtml = /*html*/ `<img src="${dice.image}">`;
+    document.querySelector("#dices").insertAdjacentHTML("beforeend", diceHtml);
+  }
+
 
 // ========== hide dice function ==============
 function hideRollDice() {
@@ -85,6 +90,6 @@ function removeHiddenClass() {
 
 // ========== reset dice array for player function ==============
 function resetDiceArrayForPlayer() {
-  dicesForPlayer.innerHtml = [];
-  // document.querySelector("#dices").innerHTML = "";
+  dicesForPlayer = [];
+  document.querySelector("#dices").innerHTML = "";
 }
