@@ -3,11 +3,12 @@
 let dices = [];
 let dicesForPlayer = [];
 let dicesForComputer = [];
-let playerPoints = "";
+let playerPoints = 0;
 let computerPoints = "";
 
 window.addEventListener("load", start);
 
+// ========== start function ==============
 async function start() {
   console.log("JS kører");
   dices = await fetchJsonFileAboutDices();
@@ -15,6 +16,7 @@ async function start() {
   document.querySelector("#roll-dice").addEventListener("click", showRandomDiceUser);
 }
 
+// ========== fetch JSON-data function ==============
 async function fetchJsonFileAboutDices() {
   const response = await fetch("dice.json");
   console.log(response);
@@ -23,6 +25,7 @@ async function fetchJsonFileAboutDices() {
   return data;
 }
 
+// ========== find random dice for player function ==============
 function showRandomDiceUser() {
   let randomDiceNumber = Math.random();
   randomDiceNumber = Math.floor(randomDiceNumber * 6);
@@ -35,36 +38,39 @@ function showRandomDiceUser() {
   showDice(randomDiceUser);
   if (dicesForPlayer.length == 2) {
     playerPoints = checkArrayForPointsForPlayer();
-    resetDicesForPlayer();
+    hideRollDice();
   }
   document.querySelector("#display-player-points").textContent = playerPoints;
+  // resetDiceArrayForPlayer();
+  // removeHiddenClass();
 }
-
+// ========== show dice function ==============
 function showDice(dice) {
   const diceHtml = /*html*/ `<img src="${dice.image}">`;
   document.querySelector("#dices").insertAdjacentHTML("beforeend", diceHtml);
 }
 
-function resetDicesForPlayer() {
+// ========== hide dice function ==============
+function hideRollDice() {
   console.log("læses dette");
-  // dicesForPlayer = [];
   document.querySelector("#roll-dice").classList.add("hidden");
 }
 
+// ========== check array for points for player function ==============
 function checkArrayForPointsForPlayer() {
   console.log("check array for points");
   if (dicesForPlayer[0].name === "diceSix" && dicesForPlayer[1].name === "diceSix") {
     playerPoints += 4;
     console.log("to seksere");
-  } else if (dicesForPlayer[0] === "diceSix" || dicesForPlayer[1] === "diceSix") {
+  } else if (dicesForPlayer[0].name === "diceSix" || dicesForPlayer[1].name === "diceSix") {
     playerPoints++;
     console.log("en sekser");
   } else if (
-    dicesForPlayer[0].name === "diceOne" && dicesForPlayer[1].name === "diceOne" ||
-    dicesForPlayer[0].name === "diceTwo" && dicesForPlayer[1].name === "diceTwo" ||
-    dicesForPlayer[0].name === "diceThree" && dicesForPlayer[1].name === "diceThree" ||
-    dicesForPlayer[0].name === "diceFour" && dicesForPlayer[1].name === "diceFour" ||
-    dicesForPlayer[0].name === "diceFive" && dicesForPlayer[1].name === "diceFive" 
+    (dicesForPlayer[0].name === "diceOne" && dicesForPlayer[1].name === "diceOne") ||
+    (dicesForPlayer[0].name === "diceTwo" && dicesForPlayer[1].name === "diceTwo") ||
+    (dicesForPlayer[0].name === "diceThree" && dicesForPlayer[1].name === "diceThree") ||
+    (dicesForPlayer[0].name === "diceFour" && dicesForPlayer[1].name === "diceFour") ||
+    (dicesForPlayer[0].name === "diceFive" && dicesForPlayer[1].name === "diceFive")
   ) {
     playerPoints += 2;
     console.log("to ens");
@@ -73,3 +79,12 @@ function checkArrayForPointsForPlayer() {
   return playerPoints;
 }
 
+function removeHiddenClass() {
+  document.querySelector("#roll-dice").classList.remove("hidden");
+}
+
+// ========== reset dice array for player function ==============
+function resetDiceArrayForPlayer() {
+  dicesForPlayer.innerHtml = [];
+  // document.querySelector("#dices").innerHTML = "";
+}
